@@ -28,11 +28,52 @@ You might see the following warning when the spark shell is starting up: `WARN N
   
 
 ## SBT (Scala Build Tool)
-SBT is a tool to build your scala code into a jar. The build jar can then be run using spark-submit
+SBT is a tool to build your spark application (coded in scala) into a jar. The built jar can then be run using spark-submit.
 
-1. Download SBT from [here](http://www.scala-sbt.org/0.13/docs/Installing-sbt-on-Linux.html)
+1. Download SBT from [**here**](http://www.scala-sbt.org/0.13/docs/Installing-sbt-on-Linux.html)
 2. Unzip the downloaded tar: `tar -xvzf <file.tgz>`
 3. Add sbt executable location to PATH variable: `export PATH=/data/home/devbld/sbt-launcher-packaging-0.13.13/bin:$PATH`
 
 **NOTE** - Don't use the SBT that comes with spark installation. There are certain bugs in there. 
+
+
+
+## Self-Contained Spark Application
+
+1. Let's suppose that we have a created a spark application in scala by the name of **SimpleApplication.scala**. To build it, we will be using SBT.
+2. SBT requires a configuration file. Let's call it simple.sbt whose content is:
+```
+name := "Simple Project"
+
+version := "1.0"
+
+scalaVersion := "2.11.7"
+
+libraryDependencies += "org.apache.spark" %% "spark-core" % "2.0.1"
+```
+
+3. For SBT to build our spark code correctly and produce a jar, we need to put SimpleApp.scala and simple.sbt in a typical directory structure:
+```
+$ find .
+.
+./simple.sbt
+./src
+./src/main
+./src/main/scala
+./src/main/scala/SimpleApp.scala
+./project
+./target
+```
+
+4. We will use sbt to package our spark application
+```
+$ sbt package
+```
+
+This will generate a jar under `./target/scala-2.11`
+
+5. We will use spark-submit to run the application
+```
+$ $SPARK_HOME/bin/spark-submit --class "SimpleApp" --master local[4] target/scala-2.11/simple-project_2.11-1.0.jar
+```
  
