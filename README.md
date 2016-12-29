@@ -40,8 +40,8 @@ SBT is a tool to build your spark application (coded in scala) into a jar. The b
 
 ## Self-Contained Spark Application
 
-1. Let's suppose that we have a created a spark application in scala by the name of **SimpleApplication.scala**. To build it, we will be using SBT.
-2. SBT requires a configuration file. Let's call it simple.sbt whose content is:
+* Let's suppose that we have a created a spark application in scala by the name of **SimpleApplication.scala**. To build it, we will be using SBT.
+* SBT requires a configuration file. Let's call it simple.sbt whose content is:
 ```
 name := "Simple Project"
 
@@ -52,7 +52,7 @@ scalaVersion := "2.11.7"
 libraryDependencies += "org.apache.spark" %% "spark-core" % "2.0.1"
 ```
 
-3. For SBT to build our spark code correctly and produce a jar, we need to put SimpleApp.scala and simple.sbt in a typical directory structure:
+* For SBT to build our spark code correctly and produce a jar, we need to put SimpleApp.scala and simple.sbt in a typical directory structure:
 ```
 $ find .
 .
@@ -65,14 +65,14 @@ $ find .
 ./target
 ```
 
-4. We will use sbt to package our spark application
+* We will use sbt to package our spark application
 ```
 $ sbt package
 ```
 
 This will generate a jar under `./target/scala-2.11`
 
-5. We will use spark-submit to run the application
+* We will use spark-submit to run the application
 ```
 $ $SPARK_HOME/bin/spark-submit --class "SimpleApp" --master local[4] target/scala-2.11/simple-project_2.11-1.0.jar
 ```
