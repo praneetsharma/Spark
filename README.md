@@ -40,8 +40,8 @@ SBT is a tool to build your spark application (coded in scala) into a jar. The b
 
 ## Self-Contained Spark Application
 
-* Let's suppose that we have a created a spark application in scala by the name of **SimpleApplication.scala**. To build it, we will be using SBT.
-* SBT requires a configuration file. Let's call it simple.sbt whose content is:
+* Let's suppose that we have a created a spark application in scala by the name of **SimpleApp.scala**. To build it, we will be using SBT.
+* SBT requires a configuration file. Let's call it simple.sbt with the following content:
 ```
 name := "Simple Project"
 
